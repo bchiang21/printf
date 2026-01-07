@@ -6,7 +6,7 @@
 /*   By: bchiang <bchiang@42singapore.sg            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 09:53:04 by bchiang           #+#    #+#             */
-/*   Updated: 2025/12/15 16:43:07 by bchiang          ###   ########.fr       */
+/*   Updated: 2026/01/07 14:58:07 by bchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
@@ -50,6 +50,10 @@ int	main(void)
 	int	ret1;
 	int	ret2;
 
+	char string[] = "hello";
+
+	ft_printf("%s", null);
+	
 	ret1 = ft_printf("Hello %s!\n", "world");
 	ret2 = printf("Hello %s!\n", "world");
 	printf("ft_printf returned: %d\n", ret1);
