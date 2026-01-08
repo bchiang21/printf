@@ -17,7 +17,7 @@ int	put_pointer(void *ptr)
 	int				count;
 
 	if (!ptr)
-		return ((int)write(1, "(nil)", 5));
+		return ((int)write(1, "0x0", 3));
 	addr = (unsigned long)ptr;
 	count = 0;
 	count += write(1, "0x", 2);
