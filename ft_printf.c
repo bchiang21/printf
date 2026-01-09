@@ -9,54 +9,57 @@
 /*   Updated: 2026/01/07 14:58:07 by bchiang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 #include <stdarg.h>
 #include <unistd.h>
 
 static int	handle_sign(const char **sign, va_list *ap)
 {
-	int	tmp;
+	int	count;
 
+	count = 0;
 	if (**sign != '%')
-		return ((int)write(1, (*sign)++, 1));
-
-	(*sign)++; // skip '%'
+	{
+		write(1, *sign, 1);
+		(*sign)++;
+		return (1);
+	}
+	(*sign)++;
 	if (**sign == '\0')
 		return (-1);
-
 	if (**sign == '%')
 	{
-		(*sign)++; // consume second '%'
+		(*sign)++;
 		return ((int)write(1, "%", 1));
 	}
-
-	tmp = handle_format(**sign, ap);
-	(*sign)++; 
-	return (tmp);
+	count = handle_format(**sign, ap);
+	(*sign)++;
+	return (count);
 }
-
 
 int	ft_printf(const char *format, ...)
 {
 	va_list	ap;
 	int		count;
-	int		tmp;
+	int		check;
 
 	count = 0;
 	va_start(ap, format);
 	while (*format)
 	{
-		tmp = handle_sign(&format, &ap);
-		if (tmp == -1)
+		check = handle_sign(&format, &ap);
+		if (check == -1)
 		{
 			va_end(ap);
 			return (-1);
 		}
-		count += tmp;
+		count += check;
 	}
 	va_end(ap);
 	return (count);
 }
+
 
 /* #include <stdio.h>
 #include "ft_printf.h"
